@@ -1,22 +1,47 @@
-// const navSlide = () => {
-//     const burger = document.querySelector('.burger');
-//     const nav = document.querySelector('.nav-links');
-//     const navLinks = document.querySelectorAll('.nav-links li');
-//     // Toggle Nav
 
-//     burger.addEventListener('click', () => {
-//         nav.classList.toggle('nav-active');
+(function() {
+    "use strict";
+  
+    // Easy selector helper function   
+    const select = (el, all = false) => {
+      el = el.trim()
+      if (all) {
+        return [...document.querySelectorAll(el)]
+      } else {
+        return document.querySelector(el)
+      }
+    }
 
-//         navLinks.forEach((link, index) => {
-//             if(link.style.animation) {
-//                 link.style.animation = ''
-//             } else {
-//                 link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
-//             }
-//         });
+    
+    // Easy event listener function
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all)
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener))
+      } else {
+        selectEl.addEventListener(type, listener)
+      }
+    }
+  }
 
-//         burger.classList.toggle('toggle');
-//     });
-// }
+    // Easy on scroll event listener 
+  const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
 
-// navSlide();
+    // Back to top
+    let backtotop = select('.back-to-top')
+    if (backtotop) {
+        const toggleBacktotop = () => {
+        if (window.scrollY > 100) {
+            backtotop.classList.add('active')
+        } else {
+            backtotop.classList.remove('active')
+        }
+        }
+        window.addEventListener('load', toggleBacktotop)
+        onscroll(document, toggleBacktotop)
+    }
+
+})()
