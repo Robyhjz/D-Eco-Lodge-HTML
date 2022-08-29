@@ -61,6 +61,13 @@ nav {
   width: 100%;
 }
 
+.button-primary {
+  width: 133px;
+  height: 40px;
+  background-color: #ffffff;
+  border: none;
+}
+
 .burger {
   display: none;
   cursor: pointer;
